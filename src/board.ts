@@ -10,7 +10,7 @@ export class Board {
     this.rows = rows;
     this.cols = cols;
     this.mineCount = mineCount;
-    this.grid = [];
+    this.grid = this.initializeGrid();
   }
 private initializeGrid(): Cell[][] {
   const grid: Cell[][] = [];
