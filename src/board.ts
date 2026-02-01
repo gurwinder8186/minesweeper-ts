@@ -12,4 +12,27 @@ export class Board {
     this.mineCount = mineCount;
     this.grid = [];
   }
+private initializeGrid(): Cell[][] {
+  const grid: Cell[][] = [];
+
+  for (let row = 0; row < this.rows; row++) {
+    const currentRow: Cell[] = [];
+
+    for (let col = 0; col < this.cols; col++) {
+      currentRow.push({
+        row,
+        col,
+        isMine: false,
+        isFlagged: false,
+        isRevealed: false,
+        surroundingMines: 0,
+      });
+    }
+
+    grid.push(currentRow);
+  }
+
+  return grid;
+}
+
 }
