@@ -33,7 +33,9 @@ export class Board {
     this.cols = cols;
     this.mineCount = mineCount;
     this.grid = this.initializeGrid();
+    this.placeMines();
   }
+
 private initializeGrid(): Cell[][] {
   const grid: Cell[][] = [];
 
@@ -55,6 +57,25 @@ private initializeGrid(): Cell[][] {
   }
 
   return grid;
+}
+
+/**
+ * Places mines at random positions on the board.
+ * Requires the grid to be initialized beforehand.
+ */
+private placeMines(): void {
+  const minePositions = getRandomMinePositions(
+    this.rows,
+    this.cols,
+    this.mineCount
+  );
+
+  for (const position of minePositions) {
+    const [row, col] = position.split(",").map(Number);
+
+    // Mark this cell as a mine
+    this.grid[row][col].isMine = true;
+  }
 }
 
 }
