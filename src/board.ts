@@ -1,5 +1,27 @@
 import type { Cell } from "./cell";
 
+/**
+ * Returns a set of unique random "row,col" positions for mine placement.
+ * Pure function: does not modify board state.
+ */
+function getRandomMinePositions(
+  rows: number,
+  cols: number,
+  mineCount: number
+): Set<string> {
+  const positions = new Set<string>();
+
+  // Generate unique positions until we reach the mine count
+  while (positions.size < mineCount) {
+    const row = Math.floor(Math.random() * rows);
+    const col = Math.floor(Math.random() * cols);
+
+    positions.add(`${row},${col}`);
+  }
+
+  return positions;
+}
+
 export class Board {
   readonly rows: number;
   readonly cols: number;
