@@ -41,6 +41,7 @@ export class Board {
     this.mineCount = mineCount;
     this.grid = this.initializeGrid();
     this.placeMines();
+    this.calculateSurroundingMines();
   }
 
 private initializeGrid(): Cell[][] {
