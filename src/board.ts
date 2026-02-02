@@ -113,5 +113,24 @@ private countSurroundingMines(row: number, col: number): number {
   return count;
 }
 
+/**
+ * Calculates surrounding mine counts for all non-mine cells.
+ * Should be called after mines are placed.
+ */
+private calculateSurroundingMines(): void {
+  for (let row = 0; row < this.rows; row++) {
+    for (let col = 0; col < this.cols; col++) {
+      const cell = this.grid[row][col];
+
+      if (cell.isMine) {
+        continue;
+      }
+
+      cell.surroundingMines = this.countSurroundingMines(row, col);
+    }
+  }
+}
+
+
 
 }
