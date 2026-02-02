@@ -85,4 +85,33 @@ private placeMines(): void {
   }
 }
 
+/**
+ * Counts how many mines surround a given cell position.
+ */
+private countSurroundingMines(row: number, col: number): number {
+  let count = 0;
+
+  for (const [rowOffset, colOffset] of NEIGHBOR_DIRECTIONS) {
+    const neighborRow = row + rowOffset;
+    const neighborCol = col + colOffset;
+
+    // Skip out-of-bounds neighbors
+    if (
+      neighborRow < 0 ||
+      neighborRow >= this.rows ||
+      neighborCol < 0 ||
+      neighborCol >= this.cols
+    ) {
+      continue;
+    }
+
+    if (this.grid[neighborRow][neighborCol].isMine) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+
 }
