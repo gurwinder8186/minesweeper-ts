@@ -1,5 +1,12 @@
 import type { Cell } from "./cell";
 
+// Relative positions of the 8 neighboring cells
+const NEIGHBOR_DIRECTIONS = [
+  [-1, -1], [-1, 0], [-1, 1],
+  [0, -1],           [0, 1],
+  [1, -1],  [1, 0],  [1, 1],
+];
+
 /**
  * Returns a set of unique random "row,col" positions for mine placement.
  * Pure function: does not modify board state.
