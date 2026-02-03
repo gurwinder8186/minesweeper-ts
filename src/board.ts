@@ -143,6 +143,11 @@ private calculateSurroundingMines(): void {
  */
 
 revealCell(row: number, col: number): void {
+  // Ignore input if game is already over
+  if (this.status !== "playing") {
+    return;
+  }
+
   const cell = this.grid[row][col];
 
   if (cell.isRevealed || cell.isFlagged) {
@@ -151,14 +156,19 @@ revealCell(row: number, col: number): void {
 
   cell.isRevealed = true;
 
+  // Revealing a mine ends the game
   if (cell.isMine) {
+    this.status = "lost";
     return;
   }
 
   if (cell.surroundingMines === 0) {
     this.revealAdjacentCells(row, col);
   }
+
+  this.checkWinCondition();
 }
+
 
 /**
  * Flood‑fills outward from an empty cell, revealing neighbors.
@@ -193,6 +203,8 @@ private revealAdjacentCells(row: number, col: number): void {
     }
   }
 }
+
+
 
 
 
