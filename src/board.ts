@@ -155,6 +155,40 @@ revealCell(row: number, col: number): void {
   }
 }
 
+/**
+ * Flood‑fills outward from an empty cell, revealing neighbors.
+ */
+private revealAdjacentCells(row: number, col: number): void {
+  for (const [rowOffset, colOffset] of NEIGHBOR_DIRECTIONS) {
+    const neighborRow = row + rowOffset;
+    const neighborCol = col + colOffset;
+
+// Skip neighbors outside the board
+    if (
+      neighborRow < 0 ||
+      neighborRow >= this.rows ||
+      neighborCol < 0 ||
+      neighborCol >= this.cols
+    ) {
+      continue;
+    }
+
+    const neighbor = this.grid[neighborRow][neighborCol];
+
+// Skip cells already revealed or flagged
+    if (neighbor.isRevealed || neighbor.isFlagged) {
+      continue;
+    }
+
+    neighbor.isRevealed = true;
+
+// Recurse only into empty neighbors
+    if (!neighbor.isMine && neighbor.surroundingMines === 0) {
+      this.revealAdjacentCells(neighborRow, neighborCol);
+    }
+  }
+}
+
 
 
 
