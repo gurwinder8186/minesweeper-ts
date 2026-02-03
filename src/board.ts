@@ -1,5 +1,8 @@
 import type { Cell } from "./cell";
 
+export type GameStatus = "playing" | "won" | "lost";
+
+
 // Relative positions of the 8 neighboring cells
 const NEIGHBOR_DIRECTIONS = [
   [-1, -1], [-1, 0], [-1, 1],
@@ -34,6 +37,8 @@ export class Board {
   readonly cols: number;
   readonly mineCount: number;
   readonly grid: Cell[][];
+  status: GameStatus= "playing";
+
 
   constructor(rows: number, cols: number, mineCount: number) {
     this.rows = rows;
