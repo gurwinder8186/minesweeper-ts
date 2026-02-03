@@ -132,6 +132,30 @@ private calculateSurroundingMines(): void {
   }
 }
 
+/**
+ * Reveals a cell. Stops if flagged, already revealed, or a mine.
+ * Expands automatically when the cell has zero neighboring mines.
+ */
+
+revealCell(row: number, col: number): void {
+  const cell = this.grid[row][col];
+
+  if (cell.isRevealed || cell.isFlagged) {
+    return;
+  }
+
+  cell.isRevealed = true;
+
+  if (cell.isMine) {
+    return;
+  }
+
+  if (cell.surroundingMines === 0) {
+    this.revealAdjacentCells(row, col);
+  }
+}
+
+
 
 
 }
