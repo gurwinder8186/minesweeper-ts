@@ -204,7 +204,23 @@ private revealAdjacentCells(row: number, col: number): void {
   }
 }
 
+/**
+ * Checks whether all non-mine cells have been revealed.
+ * If so, marks the game as won.
+ */
+private checkWinCondition(): void {
+  for (let row = 0; row < this.rows; row++) {
+    for (let col = 0; col < this.cols; col++) {
+      const cell = this.grid[row][col];
 
+      if (!cell.isMine && !cell.isRevealed) {
+        return;
+      }
+    }
+  }
+
+  this.status = "won";
+}
 
 
 
