@@ -222,6 +222,25 @@ private checkWinCondition(): void {
   this.status = "won";
 }
 
+/**
+ * Toggles a flag on a cell.
+ * Flagging is disabled for revealed cells or finished games.
+ */
+toggleFlag(row: number, col: number): void {
+  // Ignore input if game is over
+  if (this.status !== "playing") {
+    return;
+  }
+
+  const cell = this.grid[row][col];
+
+  // Revealed cells cannot be flagged
+  if (cell.isRevealed) {
+    return;
+  }
+
+  cell.isFlagged = !cell.isFlagged;
+}
 
 
 
