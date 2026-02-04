@@ -1,0 +1,19 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 32px);
+  gap: 4px;
+}
+
+.cell {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  background: #eee;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cell.revealed {
+  background: #ddd;
+  cursor: default;
+}
