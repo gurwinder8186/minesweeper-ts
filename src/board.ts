@@ -242,6 +242,24 @@ toggleFlag(row: number, col: number): void {
   cell.isFlagged = !cell.isFlagged;
 }
 
+/**
+ * Returns the number of currently flagged cells.
+ */
+getFlagCount(): number {
+  let count = 0;
+
+  for (let row = 0; row < this.rows; row++) {
+    for (let col = 0; col < this.cols; col++) {
+      if (this.grid[row][col].isFlagged) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+
 
 
 }
