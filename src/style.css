@@ -1,16 +1,48 @@
+body {
+  font-family: system-ui, sans-serif;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  max-width: fit-content;
+  gap: 16px;
+}
+
+.status {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.restart {
+  padding: 6px 12px;
+  border: 1px solid #aaa;
+  background: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.restart:hover {
+  background: #f2f2f2;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 32px);
   gap: 4px;
 }
 
 .cell {
   width: 32px;
   height: 32px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   background: #eee;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .cell.revealed {
