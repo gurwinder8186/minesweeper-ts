@@ -72,20 +72,41 @@ private initializeGrid(): Cell[][] {
 }
 
 /**
- * Places mines at random positions on the board.
- * Requires the grid to be initialized beforehand.
+ * Places mines while ensuring the first clicked cell
+ * and its surrounding neighbors are mine-free.
  */
-private placeMines(): void {
-  const minePositions = getRandomMinePositions(
-    this.rows,
-    this.cols,
-    this.mineCount
-  );
+private placeMinesExcluding(excludeRow: number, excludeCol: number): void {
+  const positions = new Set<string>();
 
-  for (const position of minePositions) {
+  // Collect cells to protect (first click + neighbors)
+  const protectedCells = new Set<string>();
+
+  protectedCells.add(`${excludeRow},${excludeCol}`);
+
+  for (const [rowOffset, colOffset] of NEIGHBOR_DIRECTIONS) {
+    const r = excludeRow + rowOffset;
+    const c = excludeCol + colOffset;
+
+    if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+      protectedCells.add(`${r},${c}`);
+    }
+  }
+
+  while (positions.size < this.mineCount) {
+    const row = Math.floor(Math.random() * this.rows);
+    const col = Math.floor(Math.random() * this.cols);
+
+    const key = `${row},${col}`;
+
+    if (protectedCells.has(key)) {
+      continue;
+    }
+
+    positions.add(key);
+  }
+
+  for (const position of positions) {
     const [row, col] = position.split(",").map(Number);
-
-    // Mark this cell as a mine
     this.grid[row][col].isMine = true;
   }
 }
@@ -145,6 +166,11 @@ revealCell(row: number, col: number): void {
   // Ignore input if game is already over
   if (this.status !== "playing") {
     return;
+  }
+    if (this.isFirstMove) {
+    this.placeMinesExcluding(row, col);
+    this.calculateSurroundingMines();
+    this.isFirstMove = false;
   }
 
   const cell = this.grid[row][col];
