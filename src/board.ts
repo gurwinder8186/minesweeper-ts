@@ -38,6 +38,7 @@ export class Board {
   readonly mineCount: number;
   readonly grid: Cell[][];
   status: GameStatus= "playing";
+  private isFirstMove: boolean = true;
 
 
   constructor(rows: number, cols: number, mineCount: number) {
@@ -45,9 +46,7 @@ export class Board {
     this.cols = cols;
     this.mineCount = mineCount;
     this.grid = this.initializeGrid();
-    this.placeMines();
-    this.calculateSurroundingMines();
-  }
+      }
 
 private initializeGrid(): Cell[][] {
   const grid: Cell[][] = [];
