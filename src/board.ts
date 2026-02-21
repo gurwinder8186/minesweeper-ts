@@ -284,6 +284,21 @@ getFlagCount(): number {
   return count;
 }
 
+/**
+ * Reveals all mine cells.
+ * Used when the game is lost.
+ */
+public revealAllMines(): void {
+  for (let row = 0; row < this.rows; row++) {
+    for (let col = 0; col < this.cols; col++) {
+      const cell = this.grid[row][col];
+      if (cell.isMine) {
+        cell.isRevealed = true;
+      }
+    }
+  }
+}
+
 
 
 
