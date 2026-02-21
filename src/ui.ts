@@ -62,6 +62,7 @@ export class UI {
         gridElement.appendChild(cellElement)
       }
     }
+    
 
     this.root.appendChild(header)
     this.root.appendChild(gridElement)
@@ -75,6 +76,7 @@ export class UI {
       button.classList.add('revealed')
 
       if (cell.isMine) {
+        button.classList.add('mine')
         button.textContent = '💣'
       } else if (cell.surroundingMines > 0) {
         button.textContent = String(cell.surroundingMines)

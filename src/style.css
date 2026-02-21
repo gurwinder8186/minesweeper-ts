@@ -56,3 +56,8 @@ body {
   background: #95be82;
   cursor: default;
 }
+
+.cell.mine {
+  background-color: #e74c3c;
+  color: rgb(29, 21, 113);
+}
